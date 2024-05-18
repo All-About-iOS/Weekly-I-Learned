@@ -6,10 +6,8 @@
     - 보조 기억장치에 저장된 프로그램을 메모리에 적재하고, 실행하면 프로세스가 된다.
     - 이러한 과정을 `프로세스를 생성한다` 라고 한다.
         - 이 말은 즉, 저장장치에 저장되어 있지만 메모리에는 적재되지 않은 상태를 **프로그램**이라고 한다는 것.
-            
-            ![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/307823fb-83e9-44f6-b75e-3cddf8179b83/e5ce94b1-b6d7-4339-9db9-fb295638eed1/Untitled.png)
-            
-- 프로세스는 **포그라운드 프로세스(Foreground process), 백그라운드 프로세스(Background process)**로 나뉘며
+            <img src="https://github.com/JUNY0110/Weekly-I-Learned/assets/98405970/10ba9df7-4448-4aab-a2a0-f9974d56a311" width=300>
+- 프로세스는 **포그라운드 프로세스(Foreground process), 백그라운드 프로세스(Background process)** 로 나뉘며
     - 포그라운드 프로세스는 사용자가 보는 앞에서 실행되는 프로세스이며
     - 백그라운드 프로세스는 사용자가 보지 못하는 곳에서 실행되는 프로세스이다.
         - 또, 백그라운드 프로세스는 사용자와 상호작용 유무를 기준으로 구분된다.
@@ -21,8 +19,7 @@
 
 - 프로세스는 실행을 위해 CPU를 필요로 하지만, CPU의 자원은 한정되어 있기 때문에 여러가지 스케줄링 방식을 사용하는데, 이 때 각각의 프로세스가 무엇인지 식별하는 도구가 필요하다. 이 도구가 **프로세스 제어블록**이다.
     - CPU가 일정 시간(주기)마다 차례가 끝났음을 알리며, 이를 **타이머 인터럽트** 라고 한다.
-    
-    ![IMG_0039.jpg](https://prod-files-secure.s3.us-west-2.amazonaws.com/307823fb-83e9-44f6-b75e-3cddf8179b83/5c373357-c8a1-4667-a268-103692ab11c8/IMG_0039.jpg)
+    <img src="https://github.com/JUNY0110/Weekly-I-Learned/assets/98405970/47bd5cec-669b-421c-83a5-f2506b32b964" width=600>
     
 - PCB는 `프로세스와 관련된 정보를 저장하는 자료 구조`로, PCB를 이용해 프로세스를 식별하고 해당 프로세스를 처리하는 데 필요한 정보를 판단한다.
 - PCB는 프로세스 생성 시 커널영역에서 만들어지고, 실행이 끝나면 폐기된다.
@@ -30,9 +27,7 @@
     - 프로세스가 종료되었다 = OS가 해당 PCB를 폐기했다. 와 동의어이다.
 - PCB에 담기는 정보는 **PID**, **레지스터 값**, **프로세스 상태**, **CPU 스케줄링 정보**, **메모리 관리 정보**, **사용한 파일과 입출력장치 목록** 등이 있다. 그리고 이러한 하나의 프로세스 수행을 재개하기 위해 기억해야 할 정보를 `문맥(Context)` 라고 한다.
     
-    <aside>
-    💡
-    
+    ```
     1. 프로세스 ID ( PID )
         - 특정 프로세스를 식별하기 위해 부여하는 고유 번호
     2. 레지스터 값
@@ -48,12 +43,10 @@
         - 베이스 레지스터, 한계 레지스터 값, 페이지 테이블 정보가 PCB에 담겨있음.
     6. 사용한 파일과 입출력장치 목록
         - 어떤 입출력 장치가 프로세스에 할당되었고, 어떤 파일들을 열었는지에 대한 정보가 PCB에 기록된다.
-    </aside>
-    
+    ```
+    <img src="https://github.com/JUNY0110/Weekly-I-Learned/assets/98405970/c211b26e-bf28-497f-90eb-69a6abfba4d4" width=600>
 
-![IMG_0040.jpg](https://prod-files-secure.s3.us-west-2.amazonaws.com/307823fb-83e9-44f6-b75e-3cddf8179b83/e9e8d2fa-bec7-40a0-8e1b-67f7d9c3d276/IMG_0040.jpg)
-
-- 기존 프로세스의 문맥을 PCB에 백업하고, 문맥을 PCB로부터 복구하여 새로운 프로세스를 실행하여, **프로세스 간 실행을 전환하는 것을 `문맥 교환(Context Switching)`**이라고 한다.
+- 기존 프로세스의 문맥을 PCB에 백업하고, 문맥을 PCB로부터 복구하여 새로운 프로세스를 실행하여, **프로세스 간 실행을 전환하는 것을 `문맥 교환(Context Switching)`** 이라고 한다.
     - **여러 프로세스가 빠르게 번갈아가며 실행되는 원리로, 동시에 실행되는 것처럼 보이는 이유**이다.
     - 단, **문맥 교환이 너무 자주 일어나면, 오버헤드가 발생할 수 있기 때문에** 문맥교환이 많이 일어나는 것이 항상 좋다고할 수는 없다.
 
@@ -86,9 +79,8 @@
         
 - 코드, 데이터는 크기가 변하지 않아 **정적 할당 영역**으로 구분되며, 힙, 스택은 프로세스 실행 과정에서 크기가 변할 수 있기 때문에 **동적 할당 영역**이라고 부른다.
     - 일반적으로 힙 영역은 메모리의 낮은 주소에서 높은 주소로 할당되며, 스택 영역은 메모리의 높은 주소에서 낮은 주소로 할당되어 주소가 겹치는 일이 없도록 설계되어 있다.
-        
-        ![IMG_0041.jpg](https://prod-files-secure.s3.us-west-2.amazonaws.com/307823fb-83e9-44f6-b75e-3cddf8179b83/a91efe8d-a1e9-49f1-b68d-4b8faf562b4e/IMG_0041.jpg)
-        
+
+      <img src="https://github.com/JUNY0110/Weekly-I-Learned/assets/98405970/bdea6650-485c-4fee-9853-ed8b43ca4a18" width=300>
 
 ---
 
@@ -124,7 +116,8 @@
     - 프로세스가 종료된 상태.
     - 운영체제가 프로세스의 PCB를 제거하고 메모리를 해제한다.
 
-![IMG_0042.jpg](https://prod-files-secure.s3.us-west-2.amazonaws.com/307823fb-83e9-44f6-b75e-3cddf8179b83/c0fe65e9-8d20-4143-a804-ec44fe2bcae7/IMG_0042.jpg)
+    <img src="https://github.com/JUNY0110/Weekly-I-Learned/assets/98405970/9415bbab-0728-455d-89ce-ad0cda8fe3ef" width=600>
+
 
 ---
 
@@ -137,20 +130,20 @@
 ### 프로세스 생성 기법
 
 - 부모 프로세스가 자식 프로세스를 생성하는 방법을 간단하게 짚고 넘어가자.
-    1. 부모 프로세스는 **fork()**를 통해 자신의 복사본을 자식 프로세스로 생성한다.
+    1. 부모 프로세스는 **fork()** 를 통해 자신의 복사본을 자식 프로세스로 생성한다.
         - 자식 프로세스는 부모 프로세스의 copy이기 때문에, 부모 프로세스의 자원 대부분을 상속받는다.
             - 다만, 여기서 `CoW(Copy on Write) 개념이 적용`되어, 실제로는 `페이지 테이블(Page table)만 복사`한다.
         - 생성당시에는 부모, 자식 프로세스가 **같은 물리적 메모리 주소를 가리키고 있다**가, 이후 수정사항이 발생하면 새로운 메모리 주소를 할당하게 된다.
-            
-            ![COW - process1에서 fork()가 호출된 후](https://prod-files-secure.s3.us-west-2.amazonaws.com/307823fb-83e9-44f6-b75e-3cddf8179b83/4fa7d33e-c650-46cb-aeb3-f009d7a2ca6b/Untitled.png)
+            <img src="https://github.com/JUNY0110/Weekly-I-Learned/assets/98405970/49d5c8a7-8e13-4356-88d6-143819a31e1a" width=600>
             
             COW - process1에서 fork()가 호출된 후
+
             
         - 결과적으로 fork()의 비용은 이정도 뿐이다.
             - 부모 프로세스의 페이지 테이블을 복사하는 비용
             - 자식 프로세스를 기술하기 위한 PCB를 할당받는 비용
-    2. 자식 프로세스는 **exec()**를 통해 자신의 메모리 공간을 다른 프로그램으로 교체한다.(overwrite, 덮어쓰기)
+    2. 자식 프로세스는 **exec()** 를 통해 자신의 메모리 공간을 다른 프로그램으로 교체한다.(overwrite, 덮어쓰기)
         
-        ![COW - Process1의 특정 페이지에서 수정이 발생한 경우](https://prod-files-secure.s3.us-west-2.amazonaws.com/307823fb-83e9-44f6-b75e-3cddf8179b83/79d79965-e6ae-46ed-b44c-b269f69d7a51/Untitled.png)
+        <img src="https://github.com/JUNY0110/Weekly-I-Learned/assets/98405970/37a46938-9e89-45bc-961c-267f603b9027" width=600>
         
         COW - Process1의 특정 페이지에서 수정이 발생한 경우
