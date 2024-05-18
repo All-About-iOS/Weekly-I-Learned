@@ -1,0 +1,46 @@
+UI 작업, 알림 등 특정 작업은 main thread에서 동작시켜야 하는데요! 그럼 RxSwift에서 특정 작업을 main thread에서 동작시킬 수 있는 방법을 알아보겠습니다!
+
+## .drive()
+RxCocoa에서 제공하는 메서드로, 내부적으로 main thread에서 동작시킵니다. 에러를 방출하지 않아 UI 작업을 할 때 주로 사용되곤 합니다.
+
+```swift
+public func drive(
+    onNext: ((Element) -> Void)? = nil,
+    onCompleted: (() -> Void)? = nil,
+    onDisposed: (() -> Void)? = nil) -> Disposable {
+    
+    MainScheduler.ensureRunningOnMainThread(errorMessage: errorMessage)
+    return self.asObservable().subscribe(onNext: onNext, onCompleted: onCompleted, onDisposed: onDisposed)
+}
+```
+
+## .observeOn() / .subscribeOn()
+두 메서드 모두 파라미터를 통해 작업을 수행할 scheduler를 변경할 수 있습니다!
+observeOn : Observable로 부터 방출 된 아이템을 Observer에게 전달할 때 사용될 scheduler를 지정하는 역할
+subscribeOn : Observable이 수행 될 scheduler를 지정하는 역할
+- MainScheduler.instance : main thread에서 sync로 동작
+- MainScheduler.asyncInstance : main thread에서 async로 동작
+
+`이미 메인스레드인 경우 instance는 동기적으로 처리, asyncInstance는 비동기로 처리`
+
+```swift
+public final class MainScheduler : SerialDispatchQueueScheduler {
+		// ...
+    /// Singleton instance of `MainScheduler`
+    public static let instance = MainScheduler()
+
+    /// Singleton instance of `MainScheduler` that always schedules work asynchronously
+    /// and doesn't perform optimizations for calls scheduled from main queue.
+    public static let asyncInstance = SerialDispatchQueueScheduler(serialQueue: DispatchQueue.main)
+
+    /// In case this method is running on a background thread it will throw an exception.
+    public static func ensureRunningOnMainThread(errorMessage: String? = nil) {
+        #if !os(Linux) // isMainThread is not implemented in Linux Foundation
+            guard Thread.isMainThread else {
+                rxFatalError(errorMessage ?? "Running on background thread.")
+            }
+        #endif
+    }
+    // ...
+}
+```
