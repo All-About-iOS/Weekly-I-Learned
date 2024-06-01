@@ -10,9 +10,9 @@
 
 코드의 유연성과 타입 추론을 향상하기 위해서 
 
-아직 불분명한 타입이 크게 와닿지 않는데요, 예시를 살펴보겠습니다.
+아직 불분명한 타입이 크게 와닿지 않는데요, 예시를 살펴보겠습니다.
 
-```
+``` swift
 protocol Fruit { }
 
 struct Apple: Fruit { }
@@ -26,7 +26,8 @@ var apple = pickApple()
 
 pickApple() 함수의 반환값 앞에 some 키워드를 추가하면 Fruit는 불분명한 타입임을 의미합니다.
 
-[##_Image|kage@bPqWA4/btsHLeaUcKj/Hy1xTKlMqrgR7sGJCqL5n1/img.png|CDM|1.3|{"originWidth":930,"originHeight":178,"style":"alignLeft","width":740}_##]
+![image](https://github.com/All-About-iOS/Weekly-I-Learned/assets/52594310/ba131b02-db00-402a-bfb9-fcf0adae4fdc)
+
 
 apple이라는 변수를 살펴보면,
 
@@ -36,7 +37,7 @@ apple이라는 변수를 살펴보면,
 
 그럼,, apple의 정확한 타입이 무엇인지는 아무도 모르는 걸까요??
 
-```
+``` swift
 protocol Fruit {
     func ripe()
 }
@@ -70,7 +71,7 @@ func pickBanana() -> some Fruit {
 
 apple과 banana라는 인스턴스 두개를 생성하고, ripe()을 호출해보면,
 
-```
+``` swift
 let apple = pickApple()
 let banana = pickBanana()
 
@@ -89,7 +90,7 @@ banana.ripe()
 
 두가지 상황에 대응하기 위하여 제네릭을 사용하여 pickFruit() 함수로 수정해보겠습니다.
 
-```
+``` swift
 // 🚨 Function declares an opaque return type 'some Fruit', 
 // but the return statements in its body do not have matching underlying types
 func pickFruit<T: Fruit>(_ fruit: T) -> some Fruit {
@@ -121,7 +122,7 @@ pickFruit()에서 에러가 발생하는 원인은, 상황에 따라 여러 타�
 
 some 키워드를 지워 Fruit 프로토콜을 반환하는 함수로 수정하여 에러를 해결할 수 있습니다.
 
-```
+``` swift
 func pickFruit<T: Fruit>(_ fruit: T) -> Fruit {
     if fruit is Banana {
         return Banana()
@@ -138,7 +139,9 @@ let banana = pickFruit(Banana())
 
 apple과 banana의 타입을 살펴보면
 
-[##_Image|kage@JwByW/btsHL30RJ8I/kK0LIyWtkPlkseCTOVbHk0/img.png|CDM|1.3|{"originWidth":936,"originHeight":184,"style":"alignLeft","width":740,"height":145}_##][##_Image|kage@NPNbC/btsHKj5joZC/zVVqreGkHGgZvM3lOnr2H0/img.png|CDM|1.3|{"originWidth":936,"originHeight":192,"style":"alignLeft","width":740}_##]
+![image](https://github.com/All-About-iOS/Weekly-I-Learned/assets/52594310/2eb2e9e8-b19b-410b-96de-215097e029ad)
+![image](https://github.com/All-About-iOS/Weekly-I-Learned/assets/52594310/97697d01-9939-44da-a9a4-c89dcd1ad192)
+
 
 일반적인 Fruit 프로토콜 타입이 아닌, any Fruit 타입을 반환하고 있는 것을 확인 할 수 있습니다.
 
