@@ -1,5 +1,5 @@
 ### 개요
-- Swift Package Manager는 무엇이고, 왜 사용하는지 알아봅시다.
+- Swift Package Manager는 무엇이고, 어떻게 이루어져 있는지 알아봅시다.
 
 ### SPM이란?
 - Swift 코드 배포를 관리하는 도구
