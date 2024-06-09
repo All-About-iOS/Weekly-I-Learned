@@ -101,6 +101,7 @@ let package = Package(
 - 모듈 또는 테스트 스위트(test suite)가 되는 패키지의 기본적인 빌딩 블록
 - 하나의 패키지가 여러 타겟을 가질 수 있다.
 <img width="321" alt="Screenshot 2024-06-08 at 6 52 56 PM" src="https://github.com/All-About-iOS/Weekly-I-Learned/assets/22342277/7629c62c-5c53-4b2e-b088-d81047df6e4c">
+
 - Sources, Tests 바로 아래에 위치한 폴더가 타겟 단위이다.
 - 위 예시를 확인하면 타겟 name과 각 폴더 이름이 일치하는 것을 확인할 수 있다.
 - 이러한 폴더를 추가해 다른 타겟을 생성할 수 있다.
