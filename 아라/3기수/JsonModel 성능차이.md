@@ -4,10 +4,6 @@
 
 [https://app.quicktype.io](https://app.quicktype.io)
 
- [Instantly parse JSON in any language | quicktype
-
-app.quicktype.io](https://app.quicktype.io)
-
 그래서 이렇게 JSON 모델을 손쉽게 만들어주는 툴이 존재합니다!
 
 물론 항상 원하는대로 나오는 것은 아니라 약간의 수정이 필요하기도 하지만 이정도의 귀찮음은 감수 가능하죠^,^
@@ -23,15 +19,9 @@ Open API의 경우 제 입맛대로 바꾸긴 당연히 어렵고
 
 [https://developers.naver.com/docs/serviceapi/search/shopping/shopping.md#](https://developers.naver.com/docs/serviceapi/search/shopping/shopping.md#)
 
- [검색 > 쇼핑 - Search API
-
-검색 > 쇼핑 쇼핑 검색 개요 개요 검색 API와 쇼핑 검색 개요 검색 API는 네이버 검색 결과를 뉴스, 백과사전, 블로그, 쇼핑, 웹 문서, 전문정보, 지식iN, 책, 카페글 등 분야별로 볼 수 있는 API입니다
-
-developers.naver.com](https://developers.naver.com/docs/serviceapi/search/shopping/shopping.md#)
-
 해당 API의 Response 모델을 살펴보면, 
 
-```
+``` swift
 struct SearchResponse: Codable {
     let lastBuildDate: String
     let total, start, display: Int
@@ -56,10 +46,10 @@ struct Product: Codable {
 ```
 
 이렇게 엄청 많은 정보가 담겨서 오는데요!
-
 하지만 저는 몇개만 골라서 사용하고 싶어서
 
-```
+
+``` swift
 struct SearchResponse: Codable {
     let total, start, display: Int
     var items: [Product]
@@ -68,14 +58,16 @@ struct SearchResponse: Codable {
 struct Product: Codable { }
 ```
 
-이렇게 정리해주었어요.
 
+이렇게 정리해주었어요.
 여기서 궁금한 점은, 같은 API를 호출할 때 Codable한 모델의 속성 개수 차이가 성능에 영향을 줄까? 였습니다.
+
 
 그래서 간단하게 확인해보니!!
 
 ![image](https://github.com/All-About-iOS/Weekly-I-Learned/assets/52594310/41252669-3038-4c24-b728-ebddd36e02d6)
 ![image](https://github.com/All-About-iOS/Weekly-I-Learned/assets/52594310/bcb9af53-3978-4e7c-8c31-1454e85505ea)
+
 
 유의미한 차이는 발견하지 못했습니다^^,,
 어떻게 보면 당연한 결과 같기도 하네요!
