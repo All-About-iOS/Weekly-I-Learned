@@ -3,7 +3,8 @@ Hot, Cold는 너무나 익숙한 단어이지만 Observable 앞에 붙을 경우
 
 우선 ReactiveX 공식 문서에 나와있는 설명을 살펴보겠습니다.
 
-[##_Image|kage@byetmG/btsH1FrN0FY/XdPVdYh8N0oppTZC2Fejn1/img.png|CDM|1.3|{"originWidth":1552,"originHeight":538,"style":"alignCenter"}_##]
+![image](https://github.com/All-About-iOS/Weekly-I-Learned/assets/52594310/768b69cb-0e6c-4d78-a8c4-445e4063b09a)
+
 
 위 내용을 살펴보았을 때!
 Observable은 시퀀스를 관찰할 수 있는 시점에 따라, 혹은 이벤트가 방출되는 시점에 따라 Hot과 Cold로 구분할 수 있을 것 같습니다.
