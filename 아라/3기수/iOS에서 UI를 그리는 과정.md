@@ -1,10 +1,12 @@
 ## **Main Run Loop**
-![image](https://github.com/All-About-iOS/Weekly-I-Learned/assets/52594310/b5d5cbb1-506f-4c07-83aa-75665598b4f2)
+<img width="60%" alt="image" src="https://github.com/All-About-iOS/Weekly-I-Learned/assets/52594310/b5d5cbb1-506f-4c07-83aa-75665598b4f2">
+
 run loop는 키보드 마우스와 같은 input 소스나 timer에 대해 처리하는 루프로, thread당 하나의 run loop가 존재합니다. 기본적으로 자동으로 실행되지 않지만 main thread에서는 UIApplication으로 인해 자동으로 실행되며 반복 실행은 하지 않습니다.
 event queue에 event를 쌓고, run loop가 실행되는 동안 해당 이벤트를 핸들링하게 되는데요, 이때 해당 run loop에서의 event 핸들링이 모두 끝나게 되면 update cycle로 넘어가게 됩니다.
 
 ## **Update Cycle**
-![image](https://github.com/All-About-iOS/Weekly-I-Learned/assets/52594310/2dfec569-2cff-463a-95e9-fdf80bb3d62a)
+<img width="60%" alt="image" src="https://github.com/All-About-iOS/Weekly-I-Learned/assets/52594310/2dfec569-2cff-463a-95e9-fdf80bb3d62a">
+
 update cycle은  layout, display, constraints 등 view의 모든 변경 사항을 갱신해주는 과정입니다. 대략 60초에 1번 꼴로 실행되기 때문에 사용자가 체감할 수 없을 정도로 매우 짧은 시간이지만, 이벤트 발생 시점과 update cycle 시작 시간 사이 차이는 분명히 존재합니다.
 그래서 view가 원하지 않는 동작을 하기도 하는데요, 이를 해결하기 위해 update cycle을 제어하는 여러 메서드를 활용할 수 있습니다.
 
